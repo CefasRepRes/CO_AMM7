@@ -104,7 +104,7 @@
 !-----------------------------------------------------------------------
    !                        ! =T  read T-S fields for:
    ln_tsd_init   = .true.   !  ocean initialisation
-   ln_tsd_interp = .true.   !  Interpolation of T & S in the verticalinput data (T) or not (F)
+   ln_tsd_interp = .false.   !  Interpolation of T & S in the verticalinput data (T) or not (F)
    ln_tsd_dmp    = .false.  !  T-S restoring   (see namtra_dmp)
    
    cn_dir      = './'      !  root directory for the T-S data location

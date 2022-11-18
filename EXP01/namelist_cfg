@@ -114,7 +114,7 @@
    sn_tem      = 'initcd_y2005m01.nc',             -12.,        'toce',      .true.      ,  .true., 'yearly'  ,    ''            ,    ''    ,    ''
    sn_sal      = 'initcd_y2005m01.nc',             -12.,        'soce',      .true.      ,  .true., 'yearly'  ,    ''            ,    ''    ,    ''
    sn_dep      = 'initcd_y2005m01.nc',             -12.,        'gdept',     .false.     ,  .true., 'yearly'  ,    ''            , ''       ,    ''
-   sn_msk      = 'initcd_y2005m01.nc',             -12.,        'mask',      .false.     ,  .true., 'yearly'  ,    ''            , ''       ,    ''
+   !sn_msk      = 'initcd_y2005m01.nc',             -12.,        'mask',      .false.     ,  .true., 'yearly'  ,    ''            , ''       ,    ''
 /
 !!======================================================================
 !!            ***  Surface Boundary Condition namelists  ***          !!

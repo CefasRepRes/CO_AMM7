@@ -36,7 +36,7 @@
    nn_no       =  0          !  Assimilation cycle index
    cn_exp      =  "co9_amm7" !  experiment name
    nn_it000    =  1          !  first time step
-   nn_itend    =  288        !  last time step (288 per 24hr) 
+   nn_itend    =  1440        !  last time step (288 per 24hr) 
    nn_date0    =  20050101   !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
    nn_time0    =  0          !  initial time of day in hhmm
    nn_leapy    =  1          !  Leap year calendar (1) or not (0)
@@ -370,7 +370,7 @@
    !                          !  automatically defined to T if the number of vertical levels in bdy dta /= jpk
    ln_full_vel = .false.      !  T if [uv]3d are "full" velocities and not only its baroclinic components
    !
-   cn_dir  = './BDY/'
+   cn_dir  = './BDY/2005/'
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
@@ -389,7 +389,7 @@
    !                          !  automatically defined to T if the number of vertical levels in bdy dta /= jpk
    ln_full_vel = .false.       !  T if [uv]3d are "full" velocities and not only its baroclinic components
    !
-   cn_dir  =   './BDY_SKAG/'
+   cn_dir  =   './BDY_SKAG/2005/'
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
@@ -404,7 +404,7 @@
 !-----------------------------------------------------------------------
 &nambdy_tide   !  tidal forcing at open boundaries
 !-----------------------------------------------------------------------
-   filtide      = 'TIDE/amm7_bdytide_'      !  file name root of tidal forcing files
+   filtide      = 'TIDE/ORIGINAL/amm7_bdytide_'      !  file name root of tidal forcing files
 /
 !!======================================================================
 !!                ***  Top/Bottom boundary condition  ***             !!

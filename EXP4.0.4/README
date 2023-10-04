@@ -1,0 +1,8 @@
+EXP for testing on UEAHPC with NEMO4.0.4. 
+
+NEMO code used from MOSRS here: 
+Revision 16065: /NEMO/branches/NERC/NEMO_4.0.4_CO9_package_tides (metoffice.gov.uk)
+To extract to HPC: 
+svn co https://code.metoffice.gov.uk/svn/nemo/NEMO/branches/NERC/NEMO_4.0.4_CO9_package_tides/
+
+Initial content copied from EXP00.

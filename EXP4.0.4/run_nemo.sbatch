@@ -8,6 +8,6 @@
 #SBATCH --ntasks=20
 
 module purge
-source ~/NEMO/NEMO_4.0.2/add_mod_ada_intel.sh
+source ~/NEMO/NEMO_4.0.4_CO9_package_tides/add_mod_ada_intel.sh
 
 mpirun ./nemo

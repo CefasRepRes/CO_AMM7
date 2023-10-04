@@ -381,6 +381,11 @@
    bn_v3d      =    'amm7_bdyV'          ,         24        , 'vomecrty',    .true.   , .false. ,  'daily'  ,    ''    ,   ''   ,   ''
    bn_tem      =    'amm7_bdyT'          ,         24        , 'votemper',    .true.   , .false. ,  'daily'  ,    ''    ,   ''   ,   ''
    bn_sal      =    'amm7_bdyT'          ,         24        , 'vosaline',    .true.   , .false. ,  'daily'  ,    ''    ,   ''   ,   ''
+ !   bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+ !   bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+ !   bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+ !   bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+
 /
 !-----------------------------------------------------------------------
 &nambdy_dta      !  open boundaries - external data           ("key_bdy")
@@ -400,6 +405,11 @@
    bn_v3d      =  'SF51_bdyV'        ,         24        , 'vomecrty',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
    bn_tem      =  'SF51_bdyT'        ,         24        , 'votemper',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
    bn_sal      =  'SF51_bdyT'        ,         24        , 'vosaline',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+ !  bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+ !  bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+ !  bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+ !  bn_t_i= 'NOT USED'              ,         24.       , 'sitemp'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
+
 /
 !-----------------------------------------------------------------------
 &nambdy_tide   !  tidal forcing at open boundaries
@@ -419,7 +429,7 @@
 !-----------------------------------------------------------------------
 &namdrg        !   top/bottom drag coefficient                          (default: NO selection)
 !-----------------------------------------------------------------------
-   ln_OFF      = .false.   !  free-slip       : Cd = 0                  (F => fill namdrg_bot
+   ln_drg_OFF      = .false.   !  free-slip       : Cd = 0                  (F => fill namdrg_bot
    ln_lin      = .false.   !  linear  drag: Cd = Cd0 Uc0                   &   namdrg_top)
    ln_non_lin  = .false.   !  non-linear  drag: Cd = Cd0 |U|
    ln_loglayer = .true.    !  logarithmic drag: Cd = vkarmn/log(z/z0) |U|

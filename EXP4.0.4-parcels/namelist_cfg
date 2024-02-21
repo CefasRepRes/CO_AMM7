@@ -36,7 +36,7 @@
    nn_no       =  0          !  Assimilation cycle index
    cn_exp      =  "co9_amm7" !  experiment name
    nn_it000    =  1          !  first time step
-   nn_itend    =  1440        !  last time step (288 per 24hr) 
+   nn_itend    =  288        !  last time step (288 per 24hr) 
    nn_date0    =  20050101   !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
    nn_time0    =  0          !  initial time of day in hhmm
    nn_leapy    =  1          !  Leap year calendar (1) or not (0)
@@ -213,6 +213,7 @@
    sn_wndi     =   'ERA5_U10'            ,        1          ,   'U10'   ,    .true.   , .false.,  'yearly' ,  'weights_era5_bicubic.nc'   ,  'Uwnd'  ,   'ERA5_LSM'
    sn_wndj     =   'ERA5_V10'            ,        1          ,   'V10'   ,    .true.   , .false.,  'yearly' ,  'weights_era5_bicubic.nc'   ,  'Vwnd'  ,   'ERA5_LSM'
    sn_slp      =   'ERA5_MSL'            ,        1          ,   'MSL'   ,    .true.   , .false.,  'yearly' ,  'weights_era5_bicubic.nc'   ,    ''    ,   'ERA5_LSM'
+
 /
 !-----------------------------------------------------------------------
 &namtra_qsr    !   penetrative solar radiation                          (ln_traqsr =T)
@@ -256,19 +257,19 @@
    ln_rnf_mouth  = .false.   !  specific treatment at rivers mouths
       rn_hrnf    =  1000.e0  !  depth over which enhanced vertical mixing is used    (ln_rnf_mouth=T)
       rn_avt_rnf =    10     !  value of the additional vertical mixing coef. [m2/s] (ln_rnf_mouth=T)
-   ln_rnf_depth  = .true.    !  read in depth information for runoff
+   ln_rnf_depth  = .false.    !  read in depth information for runoff
    ln_rnf_tem    = .false.   !  read in temperature information for runoff
    ln_rnf_sal    = .false.   !  read in salinity information for runoff
    rn_rfact      =  1.e0     !  multiplicative factor for runoff
    cn_dir = './RIV/'  !  root directory for the flux data location
-   !___________!_________________________________!___________________!___________!_____________!_________!___________!__________________!__________!_______________!
-   !           !  file name                      ! frequency (hours) ! variable  ! time interp.!  clim   ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
-   !           !                                 !  (if <0  months)  !   name    !   (logical) !  (T/F)  ! 'monthly' !                  ! pairing  !    filename   !
-   sn_rnf      = 'rivers'                        ,        24         , 'rorunoff',   .true.    , .false. , 'yearly'  , ''               , ''       , ''
+   !___________!____________________________________________!___________________!___________!_____________!_________!___________!__________________!__________!_______________!
+   !           !  file name                                 ! frequency (hours) ! variable  ! time interp.!  clim   ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
+   !           !                                            !  (if <0  months)  !   name    !   (logical) !  (T/F)  ! 'monthly' !                  ! pairing  !    filename   !
+   sn_rnf      = 'NOWMAPS_rivers',        24         , 'rorunoff',   .true.    , .false. , 'yearly'  , ''               , ''       , ''
    sn_cnf      = 'runoff_1m_nomask'              ,         0         , 'socoefr0',   .false.   , .true.  , 'yearly'  , ''               , ''       , ''
-   sn_s_rnf    = 'rivers'                        ,        24         , 'rosaline',   .true.    , .false. , 'yearly'  , ''               , ''       , ''
-   sn_t_rnf    = 'rivers'                        ,        24         , 'rotemper',   .true.    , .false. , 'yearly'  , ''               , ''       , ''
-   sn_dep_rnf  = 'rivers'                        ,        24         , 'rodepth' ,   .false.   , .false. , 'yearly'  , ''               , ''       , ''
+   sn_s_rnf    = 'NOWMAPS_rivers',        24         , 'rosaline',   .true.    , .false. , 'yearly'  , ''               , ''       , ''
+   sn_t_rnf    = 'NOWMAPS_rivers',        24         , 'rotemper',   .true.    , .false. , 'yearly'  , ''               , ''       , ''
+   sn_dep_rnf  = 'NOWMAPS_rivers',        24         , 'rodepth' ,   .true.    , .false. , 'yearly'  , ''               , ''       , ''
 /
 !-----------------------------------------------------------------------
 &namsbc_apr    !   Atmospheric pressure used as ocean forcing           (ln_apr_dyn =T)
@@ -281,7 +282,8 @@
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
-   sn_apr      = 'ERA5_MSL'              ,          1        ,    'MSL'  ,    .true.   , .false., 'yearly'  ,'weights_era5_bicubic.nc','','ERA5_LSM'
+   sn_apr      =   'ERA5_MSL'            ,        1          ,   'MSL'   ,    .true.   , .false.,  'yearly' ,  'weights_era5_bicubic.nc'   ,    ''    ,   'ERA5_LSM'
+
 /
 
 /
@@ -366,11 +368,11 @@
 !-----------------------------------------------------------------------
 &nambdy_dta    !  open boundaries - external data                       
 !-----------------------------------------------------------------------
-   ln_zinterp  = .true.       !  T if a vertical interpolation is required. Variables gdep[tuv] and e3[tuv] must exist in the file
+   ln_zinterp  = .false.       !  T if a vertical interpolation is required. Variables gdep[tuv] and e3[tuv] must exist in the file
    !                          !  automatically defined to T if the number of vertical levels in bdy dta /= jpk
-   ln_full_vel = .false.      !  T if [uv]3d are "full" velocities and not only its baroclinic components
+   ln_full_vel = .true.      !  T if [uv]3d are "full" velocities and not only its baroclinic components
    !
-   cn_dir  = './BDY/2005/'
+   cn_dir  = './BDY/AMM7_GLO_BDY_2005/'
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
@@ -390,21 +392,21 @@
 !-----------------------------------------------------------------------
 &nambdy_dta      !  open boundaries - external data           ("key_bdy")
 !-----------------------------------------------------------------------
-   ln_zinterp  = .true.       !  T if a vertical interpolation is required. Variables gdep[tuv] and e3[tuv] must exist in the file
+   ln_zinterp  = .false.       !  T if a vertical interpolation is required. Variables gdep[tuv] and e3[tuv] must exist in the file
    !                          !  automatically defined to T if the number of vertical levels in bdy dta /= jpk
-   ln_full_vel = .false.       !  T if [uv]3d are "full" velocities and not only its baroclinic components
+   ln_full_vel = .true.       !  T if [uv]3d are "full" velocities and not only its baroclinic components
    !
    cn_dir  =   './BDY_SKAG/2005/'
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
-   bn_ssh      =  'SF51_bt_bdyT'     ,         24        , 'sossheig',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
-   bn_u2d      =  'SF51_bt_bdyU'     ,         24        , 'vobtcrtx',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
-   bn_v2d      =  'SF51_bt_bdyV'     ,         24        , 'vobtcrty',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
-   bn_u3d      =  'SF51_bdyU'        ,         24        , 'vozocrtx',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
-   bn_v3d      =  'SF51_bdyV'        ,         24        , 'vomecrty',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
-   bn_tem      =  'SF51_bdyT'        ,         24        , 'votemper',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
-   bn_sal      =  'SF51_bdyT'        ,         24        , 'vosaline',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+   bn_ssh      =  'amm7skag_bt_bdyT'     ,         24        , 'sossheig',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+   bn_u2d      =  'amm7skag_bt_bdyU'     ,         24        , 'vobtcrtx',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+   bn_v2d      =  'amm7skag_bt_bdyV'     ,         24        , 'vobtcrty',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+   bn_u3d      =  'amm7skag_bdyU'        ,         24        , 'vozocrtx',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+   bn_v3d      =  'amm7skag_bdyV'        ,         24        , 'vomecrty',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+   bn_tem      =  'amm7skag_bdyT'        ,         24        , 'votemper',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
+   bn_sal      =  'amm7skag_bdyT'        ,         24        , 'vosaline',     .true.  , .false.,  'daily'  ,    ''    ,   ''   ,  ''
  !  bn_a_i= 'NOT USED'        ,         24.       , 'siconc'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
  !  bn_h_i= 'NOT_USED'        ,         24.       , 'sithic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''
  !  bn_h_s= 'NOT USED'        ,         24.       , 'snthic'  ,    .true.   , .false.,  'daily'  ,    ''            ,   ''     ,     ''

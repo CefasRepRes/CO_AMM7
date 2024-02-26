@@ -37,7 +37,7 @@
    cn_exp      =  "co9_amm7" !  experiment name
    nn_it000    =  1          !  first time step
    nn_itend    =  288        !  last time step (288 per 24hr) 
-   nn_date0    =  20050101   !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
+   nn_date0    =  19930101   !  date at nit_0000 (format yyyymmdd) used if ln_rstart=F or (ln_rstart=T and nn_rstctl=0 or 1)
    nn_time0    =  0          !  initial time of day in hhmm
    nn_leapy    =  1          !  Leap year calendar (1) or not (0)
    ln_rstart   =  .false.    !  start from rest (F) or from a restart file (T)
@@ -107,13 +107,13 @@
    ln_tsd_interp = .false.   !  Interpolation of T & S in the verticalinput data (T) or not (F)
    ln_tsd_dmp    = .false.  !  T-S restoring   (see namtra_dmp)
    
-   cn_dir      = './'      !  root directory for the T-S data location
+   cn_dir      = './RESTARTS/'      !  root directory for the T-S data location
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
-   sn_tem      = 'initcd_y2005m01.nc',             -12.,        'toce',      .true.      ,  .true., 'yearly'  ,    ''            ,    ''    ,    ''
-   sn_sal      = 'initcd_y2005m01.nc',             -12.,        'soce',      .true.      ,  .true., 'yearly'  ,    ''            ,    ''    ,    ''
-   sn_dep      = 'initcd_y2005m01.nc',             -12.,        'gdept',     .false.     ,  .true., 'yearly'  ,    ''            , ''       ,    ''
+   sn_tem      = 'restart_19930101.nc',             -12.,        'tn',      .true.      ,  .true., 'yearly'  ,    ''            ,    ''    ,    ''
+   sn_sal      = 'restart_19930101.nc',             -12.,        'sn',      .true.      ,  .true., 'yearly'  ,    ''            ,    ''    ,    ''
+   !sn_dep      = 'initcd_y2005m01.nc',             -12.,        'gdept',     .false.     ,  .true., 'yearly'  ,    ''            , ''       ,    ''
    !sn_msk      = 'initcd_y2005m01.nc',             -12.,        'mask',      .false.     ,  .true., 'yearly'  ,    ''            , ''       ,    ''
 /
 !!======================================================================
@@ -178,7 +178,7 @@
    ln_tauwoc   = .false.   !  Activate ocean stress modified by external wave induced stress (T => ln_wave=.true. & fill namsbc_wave)
    ln_tauw     = .false.   !  Activate ocean stress components from wave model
    ln_stcor    = .false.   !  Activate Stokes Coriolis term (T => ln_wave=.true. & ln_sdw=.true. & fill namsbc_wave)
-   nn_lsm      = 1         !  =0 land/sea mask for input fields is not applied (keep empty land/sea mask filename field) ,
+   nn_lsm      = 0         !  =0 land/sea mask for input fields is not applied (keep empty land/sea mask filename field) ,
                            !  =1:n number of iterations of land/sea mask application for input fields (fill land/sea mask filename field)
 /
 !-----------------------------------------------------------------------
@@ -200,19 +200,19 @@
       rn_vfac     = 0.        !  multiplicative factor for ocean & ice velocity used to
       !                       !  calculate the wind stress (0.=absolute or 1.=relative winds)
 
-   cn_dir      = './SBC/ERA5/2005/'        !  root directory for the fluxes data location
+   cn_dir      = './SBC/ERA5/1993/'        !  root directory for the fluxes data location
    !___________!______________________!___________________!___________!_____________!________!___________!______________________________!__________!_______________!
    !           !  file name           ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename             ! rotation ! land/sea mask !
    !           !                      !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                              ! pairing  !    filename   !
-   sn_humi     =   'era5'             ,        1          ,   'SPH'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
-   sn_prec     =   'era5'             ,        1          ,   'TP'    ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
-   sn_qlw      =   'era5'             ,        1          ,  'STRD'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
-   sn_qsr      =   'era5'             ,        1          ,  'SSRD'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
-   sn_snow     =   'era5'             ,        1          ,   'SF'    ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
-   sn_tair     =   'era5'             ,        1          ,   'T2M'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
-   sn_wndi     =   'era5'             ,        1          ,   'U10'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,  'Uwnd'  ,   'ERA5_LSM'
-   sn_wndj     =   'era5'             ,        1          ,   'V10'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,  'Vwnd'  ,   'ERA5_LSM'
-   sn_slp      =   'era5'             ,        1          ,   'MSL'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
+   sn_humi     =   'era5'             ,        1          ,   'SPH'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
+   sn_prec     =   'era5'             ,        1          ,   'TP'    ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
+   sn_qlw      =   'era5'             ,        1          ,  'STRD'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
+   sn_qsr      =   'era5'             ,        1          ,  'SSRD'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
+   sn_snow     =   'era5'             ,        1          ,   'SF'    ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
+   sn_tair     =   'era5'             ,        1          ,   'T2M'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
+   sn_wndi     =   'era5'             ,        1          ,   'U10'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,  'Uwnd'  ,   ''
+   sn_wndj     =   'era5'             ,        1          ,   'V10'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,  'Vwnd'  ,   ''
+   sn_slp      =   'era5'             ,        1          ,   'MSL'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
 
 /
 !-----------------------------------------------------------------------
@@ -278,11 +278,11 @@
    ln_ref_apr  = .false.   !  ref. pressure: global mean Patm (T) or a constant (F)
    ln_apr_obc  = .true.    !  inverse barometer added to OBC ssh data
 
-   cn_dir = './SBC/ERA5/2005/'        !  root directory for the Patm data location
+   cn_dir = './SBC/ERA5/1993/'        !  root directory for the Patm data location
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
-   sn_apr      =   'era5'             ,        1          ,   'MSL'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   'ERA5_LSM'
+   sn_apr      =   'era5'             ,        1          ,   'MSL'   ,    .true.   , .false.,  'daily' , 'weights_era5_amm7_bicubic.nc'  ,    ''    ,   ''
 
 /
 
@@ -372,7 +372,7 @@
    !                          !  automatically defined to T if the number of vertical levels in bdy dta /= jpk
    ln_full_vel = .true.      !  T if [uv]3d are "full" velocities and not only its baroclinic components
    !
-   cn_dir  = './BDY/AMM7_GLO_BDY_2005/'
+   cn_dir  = './BDY/AMM7_GLO_BDY_1993/'
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !
@@ -396,7 +396,7 @@
    !                          !  automatically defined to T if the number of vertical levels in bdy dta /= jpk
    ln_full_vel = .true.       !  T if [uv]3d are "full" velocities and not only its baroclinic components
    !
-   cn_dir  =   './BDY_SKAG/2005/'
+   cn_dir  =   './BDY_SKAG/1993/'
    !___________!_________________________!___________________!___________!_____________!________!___________!__________________!__________!_______________!
    !           !  file name              ! frequency (hours) ! variable  ! time interp.!  clim  ! 'yearly'/ ! weights filename ! rotation ! land/sea mask !
    !           !                         !  (if <0  months)  !   name    !   (logical) !  (T/F) ! 'monthly' !                  ! pairing  !    filename   !

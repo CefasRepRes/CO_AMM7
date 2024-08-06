@@ -284,8 +284,8 @@ CONTAINS
                   zztmp2 = ( avm(ji,jj,jk+1) - avm(ji,jj,jk) ) / &
                           ( gdepw_n(ji,jj,jk+1) - gdepw_n(ji,jj,jk) ) * wmask(ji,jj,jk)
 
-                  z3d(ji,jj,jk) = zztmp + (gdepw_n(ji,jj,jk)-gdepw_n(ji,jj,jk-1) / &
-                                          (gdepw_n(ji,jj,jk+1)-gdepw_n(ji,jj,jk-1) * &
+                  z3d(ji,jj,jk) = zztmp + (gdepw_n(ji,jj,jk)-gdepw_n(ji,jj,jk-1)) / &
+                                          (gdepw_n(ji,jj,jk+1)-gdepw_n(ji,jj,jk-1)) * &
                                           (zztmp2 - zztmp)
                END DO
             END DO

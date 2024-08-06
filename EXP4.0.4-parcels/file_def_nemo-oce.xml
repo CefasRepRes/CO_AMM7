@@ -28,6 +28,9 @@
         <file id="file8" name_suffix="_grid_W" description="ocean W grid variables" >
           <field field_ref="woce"        name="vomecrtz"     operation="instant" />
           <field field_ref="avm"         name="avm"          operation="instant" />
+          <field field_ref="davmdz"         name="davmdz"    operation="instant" />
+          <field field_ref="avmgrad"         name="avmgrad"    operation="instant" />
+          <field field_ref="gdepw_n"        name="gdepw_n"    operation="instant" />
         </file>
       </file_group>
 

@@ -1,5 +1,11 @@
-EXP for testing on UEAHPC with NEMO4.0.4. 
+Reference configuration for providing output for parcels simulations. 
 
+NB. Uses updates to diawri.F90 in MY_SRC. 
+
+For Cefas users, see also reference cfg here:
+https://github.com/CefasRepRes/NEMO_4.0.4_CO9_package_tides/tree/main/cfgs/AMM7_parcels
+
+--
 NEMO code used from MOSRS here: 
 Revision 16065: /NEMO/branches/NERC/NEMO_4.0.4_CO9_package_tides (metoffice.gov.uk)
 To extract to HPC: 

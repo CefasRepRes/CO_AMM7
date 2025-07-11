@@ -1,5 +1,11 @@
 # CO9 AMM7 (Coastal Ocean Atlantic Margin Model 7km) 
 
+Note that this repository is a fork of the original JMMP development, for use within Cefas on UEA HPC. 
+
+All text below relates to the original development. For instructions on how to setup within Cefas, please refer to the [wiki](https://github.com/CefasRepRes/CO_AMM7/wiki). 
+
+---
+
 The Joint Marine Modelling Programme [(JMMP)](https://www.metoffice.gov.uk/research/approach/collaboration/joint-marine-modelling-programme) provides world-class and easily accessible national capability, ocean modelling infrastructure and configurations to support the UK’s scientific research and operational prediction systems for ocean, weather and climate. It is partnership between the Met Office and British Antarctic Survey, National Oceanography Centre and Centre for Polar Observation and Modelling.
 
 Model configurations are underpinned by the Nucleus for European Modelling of the Ocean [(NEMO)](https://www.nemo-ocean.eu) framework. JMMP works closely with the NEMO consortium to develop the underpinning model capability. 
